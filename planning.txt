@@ -7,4 +7,6 @@ get the user answer
 class players
  - life
 class question
- - 
+ - generate number between 1 - 20
+ - add both numbers
+ - return total 
