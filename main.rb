@@ -1,48 +1,34 @@
 require "./question.rb"
 require "./players.rb"
 
-p1 = Players.new("Player1", 3, true)
-p2 = Players.new("Player2", 3, false)
+p1 = Players.new("Player1", 3)
+p2 = Players.new("Player2", 3)
 
 while p1.life != 0 || p2.life != 0 do
-  q = Question.new(rand(1...20), rand(1...20))
-
-  if p1.turn == true
-    
-    p1.turn = true;
-    puts "#{p1.name}: What does #{q.num1} plus #{q.num2} equal?"      
-    puts q.total
-    answer = gets.chomp
-
-    if answer == q.total.to_s
-      puts "Yes! You are correct!"
-      puts "remain #{p1.life}"
-      puts "P1: #{p1.life}/3 vs. P2: #{p2.life}/3"
-      p1.turn = false;
-    else 
-      puts "Seriously! No!"
-      p1.life -= 1;
-      puts "minus #{p1.life}"
-      puts "P1: #{p1.life}/3 vs. P2: #{p2.life}/3"
-      p1.turn = false;
-    end
-
+  q = Question.new()
+  q.ask_player(p1);
+  if q.correct?
+    puts "Yes! You are correct!"
+    puts "P1: #{p1.life}/3 vs. P2: #{p2.life}/3"
   else
-
-    p1.turn = true;
-    puts "#{p2.name}: What does #{q.num1} plus #{q.num2} equal?"        
-    puts q.total
-    answer = gets.chomp
-
-    if answer == q.total.to_s
-      puts "Yes! You are correct!"
-      puts "remain #{p2.life}"
-      puts "P1: #{p1.life}/3 vs. P2: #{p2.life}/3"
-    else 
-      puts "Seriously! No!"
-      p2.life -= 1;
-      puts "minus #{p2.life}"
-      puts "P1: #{p1.life}/3 vs. P2: #{p2.life}/3"
-    end
+    puts "Seriously! No!"
+    p1.life -= 1
+    puts "P1: #{p1.life}/3 vs. P2: #{p2.life}/3"
+  end
+  puts "-----NEW TURN-----"
+  q = Question.new()
+  q.ask_player(p2);
+  if q.correct?
+    puts "Yes! You are correct!"
+    puts "P1: #{p1.life}/3 vs. P2: #{p2.life}/3"
+  else
+    puts "Seriously! No!"
+    p2.life -= 1
+    puts "P1: #{p1.life}/3 vs. P2: #{p2.life}/3"
+  end
+  puts "-----NEW TURN-----"
+  if p1.life == 0 || p2.life == 0
+    puts "-----GAME OVER-----"
+    puts "Good bye"
   end
 end

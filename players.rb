@@ -1,9 +1,8 @@
 class Players
-  attr_accessor :name, :life, :turn
-  def initialize(name, life, turn)
+  attr_accessor :name, :life
+  def initialize(name, life)
     @name = name
     @life = life
-    @turn = turn
   end
 
   # def next(name, life, turn)
