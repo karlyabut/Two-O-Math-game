@@ -1,0 +1,10 @@
+initialize with two players and two random numbers between 1- 20 and add them together
+ - whats 1 + 2 = total
+get the user answer
+ - check if its correct answer === total
+  - if wrong puts "Seriously? No." (life of 3 - 1) else puts "YES! You are correct."
+
+class players
+ - life
+class question
+ - 
